@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>SmallLang Corpora</title>
+<link rel="stylesheet" type="text/css" href="/static/stylesheets/style.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/static/stylesheets/jQuery.Tree.css" />
+<link rel="icon" href="/static/images/favicon.ico" type="image/x-icon"/>
+</head>
+
+<body onload="new Accordian('basic-accordian',5,'header_highlight');">
+<div id="main_container">
+	<div id="header">
+    	<div id="logo"><a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo" title="" border="0" /></a></div>
+
+        <div id="menu">
+            <ul>
+                <li><a href="empty.html" title="">помощь</a></li>
+                <li class="divider"></li>
+                <li><a href="empty.html" title="">о нас</a></li>
+                <li class="divider"></li>
+                <li><a href="https://masterskie.wikispaces.com/-/2015/SmallLangs" target="_blank" title="">wikispaces</a></li>
+            </ul>
+        </div>
+
+    </div>
+<br>
+    <div id="main_content">
+        <div class="title">Поиск в корпусе</div> <br>
+        Поиск в коллекциях:
+            <ul>
+            {% for collection in collections %}
+                <li> {{collection}} </li>
+            {% endfor %}
+            </ul>
+            <h2>Поиск по точной форме</h2>
+                <form action="empty.html">
+                    <p><b>Слово или фраза:</b><br>
+                        <input type="text" size="145" name="fine_query">
+                    </p>
+                    <p><input type="submit" value=" Искать " id="submit"></p>
+                </form>
+        <br>
+
+        <h2>Лексико-грамматический поиск</h2>
+                <form action="empty">
+                    <p><b>Пожалуйста напишите запрос</b><br>
+                        <input type="text" size="100">
+                    </p>
+                    <p><input type="submit" value=" Искать " id="submit"></p>
+                </form>
+
+    </div>
+
+
+
+
+</body>
+</html>
+
+

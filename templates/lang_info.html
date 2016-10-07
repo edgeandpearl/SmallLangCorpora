@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>SmallLang Corpora</title>
+<link rel="stylesheet" type="text/css" href="/static/stylesheets/style.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/static/stylesheets/jQuery.Tree.css" />
+<link rel="icon" href="/static/images/favicon.ico" type="image/x-icon"/>
+<script type="text/javascript" src="/static/stylesheets/js.js"></script>
+</head>
+
+<body onload="new Accordian('basic-accordian',5,'header_highlight');">
+<div id="main_container">
+	<div id="header">
+    	<div id="logo"><a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo" title="" border="0" /></a></div>
+
+        <div id="menu">
+            <ul>
+                <li><a href="empty.html" title="">помощь</a></li>
+                <li class="divider"></li>
+                <li><a href="empty.html" title="">о нас</a></li>
+                <li class="divider"></li>
+                <li><a href="https://masterskie.wikispaces.com/-/2015/SmallLangs" target="_blank" title="">wikispaces</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div id="main_content">
+        <div class="left_content">
+        <div class="title">{{lang_name}}</div>
+                <h1>Самое важное</h1>
+                <p>{{lang_name}} язык -- самый {{lang_name}} язык в мире!</p>
+                    {{text}}<br><br>
+                <h1>Статистика</h1>
+                <p>Для этого языка в корпусе есть {{c_size}} коллекций общим объёмом {{w_size}} словоупотреблений</p>
+            </div>
+
+                <div class="right_content">
+                <div class="title">Словарь</div>
+            <br>
+            <table width="100%">
+               <tr>
+                <th>Транскрипция</th>
+                <th>Глосса</th>
+                <th>Значение</th>
+               </tr>
+               <tr><td>-a</td><td>NOM</td><td>nominative</td></tr>
+               <tr><td>-b</td><td>ACC</td><td>accusative</td></tr>
+               <tr><td>-c</td><td>PLPF</td><td>pluperfect</td></tr>
+                <tr><td>mor</td><td>мать</td><td>mother</td></tr>
+                <tr><td>far</td><td>отец</td><td>father</td></tr>
+                <tr><td>sju</td><td>семь</td><td>seven</td></tr>
+                <tr><td>-a</td><td>NOM</td><td>nominative</td></tr>
+               <tr><td>-b</td><td>ACC</td><td>accusative</td></tr>
+               <tr><td>-c</td><td>PLPF</td><td>pluperfect</td></tr>
+                <tr><td>mor</td><td>мать</td><td>mother</td></tr>
+                <tr><td>far</td><td>отец</td><td>father</td></tr>
+                <tr><td>sju</td><td>семь</td><td>seven</td></tr>
+                <tr><td>-a</td><td>NOM</td><td>nominative</td></tr>
+               <tr><td>-b</td><td>ACC</td><td>accusative</td></tr>
+               <tr><td>-c</td><td>PLPF</td><td>pluperfect</td></tr>
+                <tr><td>mor</td><td>мать</td><td>mother</td></tr>
+                <tr><td>far</td><td>отец</td><td>father</td></tr>
+                <tr><td>sju</td><td>семь</td><td>seven</td></tr>
+              </table>
+            <br>
+
+                </div>
+
+    </div>
+
+
+    </div>
+
+
+
+
+</body>
+</html>
+
+
