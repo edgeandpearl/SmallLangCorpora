@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>SmallLang Corpora</title>
+<link rel="stylesheet" type="text/css" href="/static/stylesheets/style.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/static/stylesheets/jQuery.Tree.css" />
+<link rel="icon" href="/static/images/favicon.ico" type="image/x-icon"/>
+</head>
+
+<body onload="new Accordian('basic-accordian',5,'header_highlight');">
+<div id="main_container">
+	<div id="header">
+    	<div id="logo"><a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo" title="" border="0" /></a></div>
+
+        <div id="menu">
+            <ul>
+                <li><a href="help" title="">помощь</a></li>
+                <li class="divider"></li>
+                <li><a href="about" title="">о нас</a></li>
+                <li class="divider"></li>
+                <li><a href="https://masterskie.wikispaces.com/-/2015/SmallLangs" target="_blank" title="">wikispaces</a></li>
+                <li class="divider"></li>
+                {% if username %}
+                <li><a href="login" title="">выйти</a></li>
+                {% else %}
+                <li><a href="login" title="">войти</a></li>
+                {% endif %}
+            </ul>
+        </div>
+
+    </div>
+
+{% block content %}{% endblock %}
+
+    <div class="clear"></div>
+
+       </div>
+
+
+
+
+</body>
+</html>
