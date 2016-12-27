@@ -110,7 +110,7 @@ def parse_sentences(paragraphs):
         sentence = join_layers(sentence, 'phrase')
         sentence['phrase']['translations'] = [item.text for item in sent.xpath('./item')] # [@type="gls"]
         sentence['phrase']['words_objs'] = words_obj
-        # print(sentence)
+        print(sentence)
         sentences.append(sentence)
     return sentences
 
@@ -178,8 +178,8 @@ def collect_content(doc):
 
 def main(name):
     try:
-        if not os.path.exists("./src"):
-            os.mkdir("./src")
+        # if not os.path.exists("./src"):
+        #     os.mkdir("./src")
         fil = prep(open_file(name))
         docs = fil.xpath('//interlinear-text')
         print(len(docs))
@@ -237,5 +237,5 @@ if __name__ == "__main__":
     # print(stri["document"]["meta"]["title"]["value"])
     """кусок для обкачки"""
     # main("MokshaTmp.xml")
-    for i in main("MokshaTmp.xml"):
+    for i in main("../..MokshaTmp.xml"):
         print('ok')
