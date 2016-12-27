@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<body>
+Поиск по запросу
+
+{% for arg in  args %}
+<br> {{ arg }} = {{ args[arg] }}
+{% endfor %}
+
+{% autoescape false %}
+<p>{{result}}</p>
+{% endautoescape%}
+
+</body>
+{% endblock %}

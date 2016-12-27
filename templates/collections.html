@@ -1,33 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>SmallLang Corpora</title>
-<link rel="stylesheet" type="text/css" href="/static/stylesheets/style.css" media="screen" />
-<link rel="stylesheet" type="text/css" href="/static/stylesheets/jQuery.Tree.css" />
-<link rel="icon" href="/static/images/favicon.ico" type="image/x-icon"/>
-<script type="text/javascript" src="/static/stylesheets/js.js"></script>
-</head>
+{% extends "base.html" %}
+{% block content %}
 
-<body onload="new Accordian('basic-accordian',5,'header_highlight');">
-<div id="main_container">
-	<div id="header">
-    	<div id="logo"><a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo" title="" border="0" /></a></div>
-
-        <div id="menu">
-            <ul>
-                <li><a href="empty.html" title="">помощь</a></li>
-                <li class="divider"></li>
-                <li><a href="empty.html" title="">о нас</a></li>
-                <li class="divider"></li>
-                <li><a href="https://masterskie.wikispaces.com/-/2015/SmallLangs" target="_blank" title="">wikispaces</a></li>
-            </ul>
-        </div>
-
-    </div>
-
-
-    <div id="main_content">
+<div id="main_content">
 
             <div class="left_content">
                 <div id="basic-accordian">
@@ -51,30 +25,44 @@
             <div class="right_content">
                 <form action="query">
                     <div class="title">Выберите коллекции</div> <br>
+                      <ul id="tree">
                     {% for language in langs %}
+                     <li>
+                        <label>
+                            <input type="checkbox" />{{lang_names[language]}}
+                        </label>
+                        <ul>
                     {% for collection in collections[language] %}
                     {% if collection != "" %}
-                    <input type="checkbox" name="collection" value="{{collection}}"><span class="tooltip" tabindex="0"><u>{{collection}}</u>
+                         <li>
+                            <label>
+                                <input type="checkbox" name="collection" value="{{collection}}"><span class="tooltip" tabindex="0"><u>{{collection}}</u>
                     <span><p>Коллекция собрана в 2007 году</p><p>слов: 987</p><p>части речи: есть</p><p>глоссы: eng, rus</p>
                     <p>перевод: rus</p></span></span><Br>
+                            </label>
+                        </li>
                     {% endif %}
                     {% endfor %}
+                            </ul>
+                        </li>
                     {% endfor %}
+                            </ul>
+                     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js">
+  </script>
+
+  <script type="text/javascript" src="/static/stylesheets/jQuery.Tree.js">
+  </script>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#tree").Tree();
+    });
+  </script>
                     <br>
                     <p><input type="submit" value="Создать запрос" id="submit"></p>
                 </form>
 </div>
-
-        <div class="clear"></div>
-
-       </div>
-
     </div>
 
 
-
-
-</body>
-</html>
-
-
+{% endblock %}
