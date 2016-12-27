@@ -164,6 +164,10 @@ def result():
 @app.route('/empty')
 def empty():
     return render_template("empty.html", args=request.args.getlist('collection'))
+  
+@app.route('/ket')
+def ket():
+    return render_template("ket_meta.html")
 
 
 @app.route('/help')
