@@ -53,13 +53,17 @@ def result():
         gloss = request.args['gloss']
         transl = request.args['transl']
         pos = request.args['pos']
+        selected_show = request.args.getlist('show')
+
         result = ''
         dict_morph = {}
         dict_text = {}
         dict_gloss = {}
         dict_transl = {}
         dict_pos = {}
-        q = {"query": {"bool": {"should": []}}}
+
+        '''
+        q = {"from": 0, "size": 500, "query": {"bool": {"must": []}}}
 
         if morph:
             dict_morph = {"match": {}}
@@ -81,18 +85,69 @@ def result():
             dict_transl = {"match": {}}
             dict_transl["match"]["translations"] = transl
 
-        q["query"]["bool"]["should"] += [dict_morph] + [dict_pos] + [dict_transl] + [dict_gloss] + [dict_text]
+        q["query"]["bool"]["must"] += [dict_morph] + [dict_pos] + [dict_transl] + [dict_gloss] + [dict_text]
         res = es.search(index="smallangs", body=q)
-        hit = res['hits']['hits'][0]
-        result = u'Текст: ' + unicode(hit['_source']['words']) + u'<br>Перевод: '
-        for i in hit['_source']['translations']:
-            if i != None:
-                result += i + '<br>'
-        result += u'Морфемы: '
-        for i in hit['_source']['morphemes']:
-            result += i + '<br>'
-        result += u'Части речи: ' + unicode(hit['_source']['pos']) \
-                 + u'<br>Глоссы: ' + unicode(hit['_source']['gls'])
+        for hit in res['hits']['hits']:
+            #if hit['_score'] >= 1.0:
+            if 'txt' in selected_show:
+                result += u'Текст: ' + unicode(hit['_source']['words']) + '<br>'
+            if 'trn' in selected_show:
+                result += u'Перевод: '
+                for i in hit['_source']['translations']:
+                    if i != None:
+                        result += i + '<br>'
+            if 'mph' in selected_show:
+                result += u'Морфемы: '
+                for i in hit['_source']['morphemes']:
+                    result += i + '<br>'
+            if 'pos' in selected_show:
+                result += u'Части речи: ' + unicode(hit['_source']['pos']) + '<br>'
+            if 'gls' in selected_show:
+                result += u'Глоссы: ' + unicode(hit['_source']['gls'])
+            # result += str(hit['_score']) + '<hr>'
+            result += '<hr>'
+        '''
+
+        #txt, gls, pos, morph
+        q2 = {"from": 0, "size": 500, "query": {"nested": {"path": "phrase.words_objs", "query": {"bool": {"must": []}}}}}
+
+        if gloss:
+            dict_gloss = {"match": {}}
+            dict_gloss["match"]["phrase.words_objs.word.gls"] = gloss
+
+        if morph:
+            dict_morph = {"match": {}}
+            dict_morph["match"]["phrase.words_objs.word.morphemes"] = morph
+
+        if pos:
+            dict_pos = {"match": {}}
+            dict_pos["match"]["phrase.words_objs.word.pos"] = pos
+
+        if text:
+            dict_text = {"match": {}}
+            dict_text["match"]["phrase.words_objs.word.words"] = text
+
+        q2["query"]["nested"]["query"]["bool"]["must"] += [dict_text] + [dict_gloss] + [dict_pos] + [dict_morph]
+        res = es.search(index="smallangs", body=q2)
+        for hit in res['hits']['hits']:
+            # if hit['_score'] >= 1.0:
+            if 'txt' in selected_show:
+                result += u'Текст: ' + unicode(hit['_source']['phrase']['words']) + '<br>'
+            if 'trn' in selected_show:
+                result += u'Перевод: '
+                for i in hit['_source']['phrase']['translations']:
+                    if i != None:
+                        result += i + '<br>'
+            if 'mph' in selected_show:
+                result += u'Морфемы: '
+                for i in hit['_source']['phrase']['morphemes']:
+                    result += i + '<br>'
+            if 'pos' in selected_show:
+                result += u'Части речи: ' + unicode(hit['_source']['phrase']['pos']) + '<br>'
+            if 'gls' in selected_show:
+                result += u'Глоссы: ' + unicode(hit['_source']['phrase']['gls'])
+            # result += str(hit['_score']) + '<hr>'
+            result += '<hr>'
 
         return render_template("result.html", text=request.args.getlist('text'), transl=request.args.getlist('translation'),
                                gloss=request.args.getlist('gloss'), morph=request.args.getlist('morph'), pos=request.args.getlist('pos'),
