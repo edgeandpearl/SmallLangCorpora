@@ -102,7 +102,7 @@ def parse_sentences(paragraphs):
                     word_agr[layer] = morphs
                 except:
                     morphs = word.getchildren()[0].text
-            sentence[layer] = ' '.join([sentence.get(layer, ''), morphs]).strip()
+                sentence[layer] = ' '.join([sentence.get(layer, ''), morphs]).strip()
             # print(word_agr)
             word_agr = join_layers(word_agr, 'word')
             # print(word_agr)
