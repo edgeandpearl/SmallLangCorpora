@@ -13,7 +13,7 @@ def loader(path="."):
                     sent_ids = []
                     for sent in sents:
                         sent_info = es.index(index='smallangs', doc_type='sentence', body=sent)
-                        sent_ids.append(sent_info['index']) # ПРОВЕРЬ ЧТО ЗДЕСЬ ТОТ КЛЮЧ
+                        sent_ids.append(sent_info['_index']) # ПРОВЕРЬ ЧТО ЗДЕСЬ ТОТ КЛЮЧ
                     doc['document']['phrases'] = sent_ids
                     res = es.index(index='smallangs', doc_type='text', body=doc)
                     print(res)
